@@ -13,9 +13,9 @@ function App() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem('posts');
-    if (stored) {
-      const parsed: Post[] = JSON.parse(stored);
+    const storedPosts = localStorage.getItem('posts');
+    if (storedPosts) {
+      const parsed: Post[] = JSON.parse(storedPosts);
       const postsWithDates = parsed.map(post => ({
         ...post,
         createdAt: new Date(post.createdAt),
@@ -26,11 +26,33 @@ function App() {
       }));
       setPosts(postsWithDates);
     }
+
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch {
+        // ignore parsing errors
+      }
+    }
+
+    const storedTab = localStorage.getItem('activeTab');
+    if (storedTab === 'vida-loca' || storedTab === 'profile') {
+      setActiveTab(storedTab as Tab);
+    }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('posts', JSON.stringify(posts));
   }, [posts]);
+
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
+
+  useEffect(() => {
+    localStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
 
   const handlePost = (content: string) => {
     const newPost: Post = {
