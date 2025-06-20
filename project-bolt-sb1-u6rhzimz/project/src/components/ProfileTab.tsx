@@ -13,12 +13,12 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ user, onUpdateProfile }) => {
   const [selectedAvatar, setSelectedAvatar] = useState(user.avatar);
 
   const avatarOptions = [
-    'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400',
+    'https://i.imgur.com/ELQwZcT.png',
+    'https://i.imgur.com/KY2Y8tS.png',
+    'https://i.imgur.com/OojMgj6.png',
+    'https://i.imgur.com/L9rI7Ni.png',
+    'https://i.imgur.com/EmeHdJ3.png',
+    'https://i.imgur.com/BaV0rhR.png',
   ];
 
   const handleSave = () => {
