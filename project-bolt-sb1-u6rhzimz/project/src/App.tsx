@@ -5,7 +5,7 @@ import PostComposer from './components/PostComposer';
 import PostCard from './components/PostCard';
 import ProfileTab from './components/ProfileTab';
 import { Tab, User, Post } from './types';
-import { defaultUser, generateSamplePosts } from './utils/data';
+import { defaultUser } from './utils/data';
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('vida-loca');
@@ -13,8 +13,24 @@ function App() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
-    setPosts(generateSamplePosts());
+    const stored = localStorage.getItem('posts');
+    if (stored) {
+      const parsed: Post[] = JSON.parse(stored);
+      const postsWithDates = parsed.map(post => ({
+        ...post,
+        createdAt: new Date(post.createdAt),
+        comments: post.comments.map(comment => ({
+          ...comment,
+          createdAt: new Date(comment.createdAt),
+        })),
+      }));
+      setPosts(postsWithDates);
+    }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('posts', JSON.stringify(posts));
+  }, [posts]);
 
   const handlePost = (content: string) => {
     const newPost: Post = {
